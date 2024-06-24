@@ -1,4 +1,4 @@
-module ssot
+module github.com/mikeschinkel/ssot
 
 go 1.22
 
