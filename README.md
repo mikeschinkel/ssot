@@ -5,11 +5,11 @@ SSOT: Single Source Of Truth command line utility
 ## Overview
 SSOT stores a single source of truth for constant values in an `./ssot.yaml` file that contains a list of constants and a list of files to processes.
 
-SSOT directives are comments in the native language and replacements are do "inline." 
+SSOT directives are comments in the native language and replacements are done _"inline."_
 
 Directives are end-of-line comments that contain a named constant to replace, and a regexp to allow direct matching of content within the line. Matching identifies the content in the line that `ssot` will replace with the constant's value from the `Constants` map in  `./ssot/yaml`.
 
-The regex can but is not required to have begin and end of line anchors but only one capture group which should identify the value to replace.
+The regex can — but is not required to — have begin (`^`) and end (`$`) of line anchors but only one capture group (`(...)`) which should identify the value to replace.
 
 ## Usage 
 Store a `ssot.yaml` file in whatever directory you want to maintain your constants with a `Files` array and a `Constants` map, e.g.:
