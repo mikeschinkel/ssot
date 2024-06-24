@@ -97,7 +97,7 @@ WHERE
 ## Goals
 The current goals for this project:
 
-1. In-place updates of files; no _"source (e.g. .ts)"_ vs. _"dst (e.g. .js)"_ files.
+1. In-place updates of files; no _"src (e.g. `.ts`)"_ vs. _"dst (e.g. `.js`)"_ files.
 2. Performance first
     - Instead of scanning all files, require developer to specify the files to scan 
 3. Start simple, keep it as simple, only adding complexity when really required.
