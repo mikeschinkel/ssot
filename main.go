@@ -21,7 +21,7 @@ const (
 
 type SSOT struct {
 	Files        []string                  `yaml:"files"`
-	Extensions   map[string]string         `yaml:"extensions"`
+	Comments     map[string]string         `yaml:"comments"`
 	Constants    map[string]string         `yaml:"constants"`
 	LineMatchMap map[string]*regexp.Regexp `yaml:"-"`
 	CurrentExt   string                    `yaml:"-"`
@@ -29,7 +29,7 @@ type SSOT struct {
 
 func (ssot *SSOT) Initialize() (err error) {
 	ssot.LineMatchMap = make(map[string]*regexp.Regexp)
-	for ext := range ssot.Extensions {
+	for ext := range ssot.Comments {
 		re, ok := ssot.LineMatchMap[ext]
 		if ok {
 			continue
@@ -51,7 +51,7 @@ func (ssot *SSOT) lineMatchRegex(ext string) (re *regexp.Regexp, err error) {
 	if ok {
 		goto end
 	}
-	chars, ok = ssot.Extensions[ext]
+	chars, ok = ssot.Comments[ext]
 	if !ok {
 		err = fmt.Errorf("unsupported file type '%s'", ext)
 		goto end
@@ -141,7 +141,7 @@ func (ssot *SSOT) maybeUpdateFile(fp string) (err error) {
 		err = fmt.Errorf("line match regex not found for '%s'", ext)
 		goto end
 	}
-	commentChars, ok = ssot.Extensions[ext]
+	commentChars, ok = ssot.Comments[ext]
 	if !ok {
 		err = fmt.Errorf("comment prefix characters not found for file type '%s'", ext)
 		goto end

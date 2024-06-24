@@ -9,7 +9,7 @@ SSOT directives are comments in the native language and replacements are done _"
 
 Directives are end-of-line comments that contain a named constant to replace, and a regexp to allow direct matching of content within the line. Matching identifies the content in the line that `ssot` will replace with the constant's value from the `Constants` map in  `./ssot/yaml`.
 
-The regex can — but is not required to — have begin (`^`) and end (`$`) of line anchors but only one capture group (`(...)`) which should identify the value to replace.
+The regex can — but is not required to — have begin (`^`) and end (`$`) of line anchors but only one capture group (`(...)`) which should identify the value to replace.
 
 ## Benefits 
 Why use `ssot`?  Here are the benefits I was after when I chose to develop and start using it:
@@ -20,17 +20,22 @@ Why use `ssot`?  Here are the benefits I was after when I chose to develop and s
 4. Alternately allow the constants to be renamed easily and accurately via editor search.
 
 ## Usage 
-Store a `ssot.yaml` file in whatever directory you want to maintain your constants with a `Files` array and a `Constants` map, e.g.:
+Store a `ssot.yaml` file in whatever directory you want to maintain your constants with:
 
+1. A `comments` map with file extensions and their related comment start characters, 
+2. An `files` array with filenames to scan for constants, and 
+3. A `constants` map with constant keys and values 
+
+For example:
 ```yaml
 ---
+comments:
+    .go: //
+    .sql: --
+
 files:
     - ./shared/link_group.go
     - ./query.sql
-
-extensions:
-    .go: //
-    .sql: --
 
 constants:
     from_group_missing:      "from_group_missing"
@@ -117,10 +122,10 @@ Written to scratch my own itch. I wanted to have a single-source of truth across
 
 ## Known Limitations
 1. Currently only one named constant can be replaced per line, but a constant can be referenced multiple times in the same line, if needed _(this is assumed but untested.)_
-2. No command line options so no execution options.
-3. No versioning yet; use latest and caveat emptor. 
-4. No tests _(yet)_ as I didn't really need for my simply use-case.
-
+2. Wildcards for files are not _(yet?)_ supported.
+3. No command line options so no execution options _(yet?)_.
+4. No versioning _(yet?)_; use latest and caveat emptor. 
+5. No tests _(yet?)_ as I did not need for the simple use-case that inspired me to write `ssot`.
 
 ## Bug Reports and Pull Requests
 ...are **Welcome!**  
