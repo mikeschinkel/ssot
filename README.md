@@ -47,6 +47,9 @@ const (
 	ToGroupFound         = "to_group_found"           //ssot[to_group_found]: "([^"]+)"
 )
 ```
+Finally, run `ssot` in the directory where your `ssot.yaml` file exists.
+
+![Running ssot](./assets/running-ssot.png)
 
 ### Example .SQL file:
 
