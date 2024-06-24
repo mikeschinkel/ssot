@@ -19,16 +19,9 @@ const (
 	SSOTExtPrefix = ".ssot"
 )
 
-var (
-	commentPrefixMap = map[string]string{
-		".sql": "--",
-		".go":  "//",
-		".js":  "//",
-	}
-)
-
 type SSOT struct {
 	Files        []string                  `yaml:"files"`
+	Extensions   map[string]string         `yaml:"extensions"`
 	Constants    map[string]string         `yaml:"constants"`
 	LineMatchMap map[string]*regexp.Regexp `yaml:"-"`
 	CurrentExt   string                    `yaml:"-"`
@@ -36,7 +29,7 @@ type SSOT struct {
 
 func (ssot *SSOT) Initialize() (err error) {
 	ssot.LineMatchMap = make(map[string]*regexp.Regexp)
-	for ext := range commentPrefixMap {
+	for ext := range ssot.Extensions {
 		re, ok := ssot.LineMatchMap[ext]
 		if ok {
 			continue
@@ -53,17 +46,19 @@ end:
 }
 
 func (ssot *SSOT) lineMatchRegex(ext string) (re *regexp.Regexp, err error) {
-	var regex, prefix string
+	var regex, chars string
 	re, ok := ssot.LineMatchMap[ext]
 	if ok {
 		goto end
 	}
-	prefix, ok = commentPrefixMap[ext]
+	chars, ok = ssot.Extensions[ext]
 	if !ok {
 		err = fmt.Errorf("unsupported file type '%s'", ext)
 		goto end
 	}
-	regex = fmt.Sprintf(`^(.*)%s\s*ssot\[\s*([^]]+)\s*\]:\s*(.+)\s*$`, regexp.QuoteMeta(prefix))
+	regex = fmt.Sprintf(`^(.*)%s\s*ssot\[\s*([^]]+)\s*\]:\s*(.+)\s*$`,
+		regexp.QuoteMeta(strings.TrimSpace(chars)),
+	)
 	re, err = regexp.Compile(regex)
 	if err != nil {
 		ssot.LineMatchMap[ext] = re
@@ -146,7 +141,7 @@ func (ssot *SSOT) maybeUpdateFile(fp string) (err error) {
 		err = fmt.Errorf("line match regex not found for '%s'", ext)
 		goto end
 	}
-	commentChars, ok = commentPrefixMap[ext]
+	commentChars, ok = ssot.Extensions[ext]
 	if !ok {
 		err = fmt.Errorf("comment prefix characters not found for file type '%s'", ext)
 		goto end
