@@ -113,7 +113,9 @@ Written to scratch my own itch. I wanted to have a single-source of truth across
 4. No tests _(yet)_ as I didn't really need for my simply use-case.
 
 
-## Bug reports and Pull Requests welcome
+## Bug Reports and Pull Requests
+...are **Welcome!**  
+
 If you find this and it is useful for you but you discover bugs or have improvements to add, please feel free to create a bug report and/or a pull request.   
 
 ## Copyright
