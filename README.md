@@ -15,7 +15,7 @@ The regex can — but is not required to — have begin (`^`) and end (`$`) of
 Why use `ssot`?  Here are the benefits I was after when I chose to develop and start using it:
 
 1. Allow structured documentation via directives for locations in source where constants are shared across language files.
-2. Enable error checking for all directives to ensure correct syntax and ability to modify.
+2. Enable error checking for all directives to ensure correct syntax and ease of modification.
 3. When there is a need to change values, facilitate changing the values in one place.
 4. Alternately allow the constants to be renamed easily and accurately via editor search.
 
