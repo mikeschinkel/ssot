@@ -11,6 +11,14 @@ Directives are end-of-line comments that contain a named constant to replace, an
 
 The regex can — but is not required to — have begin (`^`) and end (`$`) of line anchors but only one capture group (`(...)`) which should identify the value to replace.
 
+## Benefits 
+Why use `ssot`?  Here are the benefits I was after when I chose to develop and start using it:
+
+1. Allow structured documentation via directives for locations in source where constants are shared across language files.
+2. Enable error checking for all directives to ensure correct syntax and ability to modify.
+3. When there is a need to change values, facilitate changing the values in one place.
+4. Alternately allow the constants to be renamed easily and accurately via editor search.
+
 ## Usage 
 Store a `ssot.yaml` file in whatever directory you want to maintain your constants with a `Files` array and a `Constants` map, e.g.:
 
