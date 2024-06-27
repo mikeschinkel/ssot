@@ -14,10 +14,10 @@ The regex can — but is not required to — have begin (`^`) and end (`$`) of l
 ## Benefits 
 Why use `ssot`?  Here are the benefits I was after when I chose to develop and start using it:
 
-1. Allow structured documentation via directives for locations in source where constants are shared across language files.
-2. Enable error checking for all directives to ensure correct syntax and ease of modification.
-3. When there is a need to change values, facilitate changing the values in one place.
-4. Alternately allow the constants to be renamed easily and accurately via editor search.
+1. **Use directives** to identify locations in source where constants are shared across language files.
+2. **Enable error checking** for all directives to ensure correct syntax.
+3. **Change values in one place** when there is a need to change values.
+4. Or, **Easily rename constants** accurately via editor search.
 
 ## Usage 
 Store a `ssot.yaml` file in whatever directory you want to maintain your constants with:
@@ -109,13 +109,12 @@ WHERE
 ```
 
 ## Goals
-The current goals for this project:
+The current goals for `ssot` are:
 
-1. In-place updates of files; no _"src (e.g. `.ts`)"_ vs. _"dst (e.g. `.js`)"_ files.
-2. Performance first
-    - Instead of scanning all files, require developer to specify the files to scan 
-3. Start simple, keep it as simple, only adding complexity when really required.
-4. Do not implement anything more than I _(or maybe someone else)_ currently need(s).
+1. **In-place updates** — no `/src` _(e.g. `.ts`)_ vs. `/dst` _(e.g. `.js`)_ files.
+2. **Performance first** — Don't scan all files, require developer to provide a list to scan. 
+3. **Keep it simple** — only adding complexity when really required.
+4. **YAGNI** — Do not implement more than I _(or maybe someone else)_ currently need(s).
 
 ## Rationale
 Written to scratch my own itch. I wanted to have a single-source of truth across different source files from different programming languages, but I did not want to have a `source -> dist` build step given the nature of the `truth` being small compared to the size of the code the truth is typically embedded in. 
